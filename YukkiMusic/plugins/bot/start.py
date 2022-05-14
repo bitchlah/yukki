@@ -35,14 +35,14 @@ from YukkiMusic.utils.inline import (help_pannel, private_panel,
 loop = asyncio.get_running_loop()
 
 
-@app.on_message(
-    filters.command(get_command("START_COMMAND"))
-    & filters.private
-    & ~filters.edited
-    & ~BANNED_USERS
-)
-@LanguageStart
-async def start_comm(client, message: Message, _):
+#@app.on_message(
+#    filters.command(get_command("START_COMMAND"))
+#    & filters.private
+#    & ~filters.edited
+#    & ~BANNED_USERS
+#)
+@app.on_message(filters.command("start") & filters.private)
+async def start_command(_, message):
     await add_served_user(message.from_user.id)
     if len(message.text.split()) > 1:
         name = message.text.split(None, 1)[1]
@@ -52,7 +52,7 @@ async def start_comm(client, message: Message, _):
                 _["help_1"], reply_markup=keyboard
             )
         if name[0:4] == "song":
-            return await message.reply_text(_["song_2"])
+            return await message.reply_text("**Usage:**\n\n/song [Music Name] or [Youtube Link]")
         if name[0:3] == "sta":
             m = await message.reply_text(
                 "🔎 Fetching your personal stats.!"
@@ -148,16 +148,13 @@ async def start_comm(client, message: Message, _):
                 published = result["publishedTime"]
             searched_text = f"""
 🔍__**Video Track Information**__
-
 ❇️**Title:** {title}
-
 ⏳**Duration:** {duration} Mins
 👀**Views:** `{views}`
 ⏰**Published Time:** {published}
 🎥**Channel Name:** {channel}
 📎**Channel Link:** [Visit From Here]({channellink})
 🔗**Video Link:** [Link]({link})
-
 ⚡️ __Searched Powered By {config.MUSIC_BOT_NAME}__"""
             key = InlineKeyboardMarkup(
                 [
@@ -221,12 +218,13 @@ async def start_comm(client, message: Message, _):
             )
 
 
-@app.on_message(
-    filters.command(get_command("START_COMMAND"))
-    & filters.group
-    & ~filters.edited
-    & ~BANNED_USERS
-)
+#@app.on_message(
+#    filters.command(get_command("START_COMMAND"))
+#    & filters.group
+#    & ~filters.edited
+#    & ~BANNED_USERS
+#)
+
 @LanguageStart
 async def testbot(client, message: Message, _):
     out = start_pannel(_)
