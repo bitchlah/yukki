@@ -17,7 +17,7 @@ HELP_COMMAND : ["mhelp"]
 SETTINGS_COMMAND : ["msettings", "msetting"]
 RELOAD_COMMAND : ["madmincache", "reload"]
 GSTATS_COMMAND : ["gstats"]
-STATS_COMMAND : ["mstats"]
+STATS_COMMAND : ["system"]
 LANGUAGE_COMMAND : ["lang", "language", "langs"]
 
 # Play Commands
