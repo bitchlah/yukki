@@ -109,7 +109,7 @@ async def get_playtype(chat_id: int) -> str:
     if not mode:
         mode = await playtypedb.find_one({"chat_id": chat_id})
         if not mode:
-            playtype[chat_id] = "Admins"
+            playtype[chat_id] = "Everyone"
             return "Everyone"
         playtype[chat_id] = mode["mode"]
         return mode["mode"]
